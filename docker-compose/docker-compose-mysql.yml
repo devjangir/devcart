@@ -1,0 +1,39 @@
+version: "1.0"
+services:
+  productsdb:
+    image: mysql:8.0
+    #restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_DATABASE: productsdb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - devkart
+  usersdb:
+    image: mysql:8.0
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_DATABASE: usersdb
+      MYSQL_ROOT_PASSWORD: root
+    #restart: always
+    ports:
+      - "3307:3306"
+    networks:
+      - devkart
+  # Database images
+
+networks:
+  devkart:
+    driver: bridge
