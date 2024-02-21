@@ -12,16 +12,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: "productservice"
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8070/eureka/
-  instance:
-    prefer-ip-address: true
-  #hostname: localhost
-
+  config:
+    import: optional:configserver:http://localhost:8071
 info:
   app:
     name: "productservice"
