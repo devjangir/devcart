@@ -1,5 +1,14 @@
 version: "1.0"
 services:
+  configserver:
+    image: devjangir/configserver:s2
+    container_name: configserver
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+    ports:
+      - "8071:8071"
+    networks:
+      - devkart
   productsdb:
     image: mysql:8.0
     #restart: always
@@ -33,7 +42,7 @@ services:
     networks:
       - devkart
   productservice:
-    image: devjangir/productservice:s2
+    image: devjangir/productservice:s3
     ports:
       - "8080:8080"
     networks:
