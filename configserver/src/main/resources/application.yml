@@ -1,0 +1,21 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: "configserver"
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/devjangir/microservice-config.git"
+          clone-on-start: true
+          force-pull: true
+          timeout: 10
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+  instance:
+    prefer-ip-address: true
